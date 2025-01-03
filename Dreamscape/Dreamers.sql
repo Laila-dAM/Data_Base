@@ -23,7 +23,7 @@ CREATE TABLE Dreams (
     ThemeID INT NOT NULL,
     DreamDate DATE NOT NULL,
     Description TEXT,
-    FOREIGN KEY (DreamerID) REFERENCES Dreamers (DreamersID) ON DELETE CASCADE,
+    FOREIGN KEY (DreamerID) REFERENCES Dreamers (DreamerID) ON DELETE CASCADE,
     FOREIGN KEY (CategoryID) REFERENCES Categories (CategoryID) ON DELETE CASCADE,
         FOREIGN KEY (ThemeID) REFERENCES Themes(ThemeID) ON DELETE CASCADE
 );
@@ -43,7 +43,7 @@ VALUES
 
 INSERT INTO Themes (ThemeName)
 VALUES
-('Flying')
+('Flying'),
 ('Falling'),
 ('Chase'),
 ('Talking to Animals'),
@@ -72,7 +72,7 @@ FROM Dreamers
 WHERE DreamVividnessLevel > 7
 ORDER BY TotalDreams DESC;
 
-SELECT (COUNT (DreamID) * 100.0 / (SELECT COUNT(*) FROM Dreams)) AS NightmarePercentage
+SELECT (COUNT(DreamID) * 100.0 / (SELECT COUNT(*) FROM Dreams)) AS NightmarePercentage
 FROM Dreams
 WHERE CategoryID = (SELECT CategoryID FROM Categories WHERE CategoryName = 'Nightmare');
 

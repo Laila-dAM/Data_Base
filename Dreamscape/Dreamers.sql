@@ -5,3 +5,25 @@ CREATE TABLE Dreamers (
     DreamVividnessLevel INT NOT NULL CHECK (DreamVividnessLevel BETWEEN 1 AND 10),
     TotalDreams INT DEFAULT 0
 );
+
+CREATE TABLE Categories (
+    CategoryID INT AUTO_INCREMENT PRIMARY KEY,
+    CategoryName VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE TABLE Themes (
+    ThemeID INT AUTO_INCREMENT PRIMARY KEY,
+    ThemeName VARCHAR(50) UNIQUE NOT NULL
+);
+
+CREATE TABLE Dreams (
+    DreamID INT AUTO_INCREMENT PRIMARY KEY,
+    DreamerID INT NOT NULL,
+    CategoryID INT NOT NULL,
+    ThemeID INT NOT NULL,
+    DreamDate DATE NOT NULL,
+    Description TEXT,
+    FOREIGN KEY (DreamerID) REFERENCES Dreamers (DreamersID) ON DELETE CASCADE,
+    FOREIGN KEY (CategoryID) REFERENCES Categories (CategoryID) ON DELETE CASCADE,
+        FOREIGN KEY (ThemeID) REFERENCES Themes(ThemeID) ON DELETE CASCADE
+);
